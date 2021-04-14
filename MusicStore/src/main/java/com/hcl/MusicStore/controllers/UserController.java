@@ -291,12 +291,11 @@ public class UserController {
 			throw new UserNotFoundException(username);
 		} else {
 			Optional<Product> foundproduct = productService.searchProductByID(id);
-	    	if (foundproduct.isEmpty()) {
+			Product product =foundproduct.get();
+	    	if (product==null) {
 	    		throw new ProductNotFoundException(id);
 	    	}
-	    	
-	    	Product product = foundproduct.get();
-	    	
+	    		    		    	
 	    	// Check if Product is already in the cart
 	    	List<Product> cart = productService.getAllProductsByUser(user);
 	    	if (!cart.isEmpty()) { // If its the same item increment the quantity
